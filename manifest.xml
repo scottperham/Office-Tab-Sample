@@ -5,7 +5,7 @@
   <ProviderName>Contoso</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="My SSO Office Add-in"/>
-  <Description DefaultValue="An add-in that shows how to use SSO, and to fallback to interactive login when SSO is not available. (805cfdc6c286)"/>
+  <Description DefaultValue="An add-in that shows how to use SSO, and to fallback to interactive login when SSO is not available. (azurewebsites.net)"/>
   <IconUrl DefaultValue="https://localhost/assets/icon-64.png"/>
   <HighResolutionIconUrl DefaultValue="https://localhost/assets/icon-128.png"/>
   <SupportUrl DefaultValue="https://www.contoso.com/help"/>
@@ -70,8 +70,8 @@
           <bt:Image id="Icon.80x80" DefaultValue="https://localhost/assets/icon-80.png"/>
         </bt:Images>
         <bt:Urls>
-          <bt:Url id="Commands.Url" DefaultValue="https://805cfdc6c286.ngrok.io"/>
-          <bt:Url id="Taskpane.Url" DefaultValue="https://805cfdc6c286.ngrok.io"/>
+          <bt:Url id="Commands.Url" DefaultValue="https://office-sso-sample.azurewebsites.net/"/>
+          <bt:Url id="Taskpane.Url" DefaultValue="https://office-sso-sample.azurewebsites.net/"/>
         </bt:Urls>
         <bt:ShortStrings>
           <bt:String id="GetStarted.Title" DefaultValue="Get started with your sample add-in!"/>
