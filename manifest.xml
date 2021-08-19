@@ -85,7 +85,7 @@
       </Resources>
         <WebApplicationInfo>
           <Id>cdb8813c-d7c7-4ef2-bf8a-2685c2341e5f</Id>
-          <Resource>api://805cfdc6c286.ngrok.io</Resource>
+          <Resource>api://office-sso-sample.azurewebsites.net</Resource>
           <Scopes>
             <Scope>User.Read</Scope>
             <Scope>profile</Scope>
