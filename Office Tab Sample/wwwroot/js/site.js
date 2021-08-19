@@ -3,18 +3,22 @@
 
 // Write your JavaScript code.
 
-$("#officeLoadSpan").html("We are loading...");
-
 let loginDialog = null;
+
+
+const onReadyTimer = new Date().getTime();
 
 Office.onReady(async () => {
 
-    $("#officeLoadSpan").html("Loaded");
-    $("#pageLoadSpan").html("Loaded");
+    let timerResult = new Date().getTime() - onReadyTimer;
+
+    $("#timings").html("<div>Office.OnReady = " + timerResult + "ms</div>");
+
+    const getAccessTokenTimer = new Date().getTime();
 
     try {
 
-        let token = await OfficeRuntime.auth.getAccessToken({ allowConsentPrompt: true, allowSignInPrompt: true });
+        let token = await OfficeRuntime.auth.getAccessToken({ allowConsentPrompt: true, allowSignInPrompt: true }); //Time this...
 
         doSomethingWithToken("SSO", token);
     }
@@ -28,11 +32,15 @@ Office.onReady(async () => {
         else {
             $("#tokenSpan").html("An exception occured: Code - " + ex.code);
 		}
-	}
+    }
+
+    timerResult = new Date().getTime() - getAccessTokenTimer;
+
+    $("#timings").html($("#timings").html() + "<div>OfficeRuntime.auth.getAccessToken (+ HTML rendering) = " + timerResult + "ms</div>");
 });
 
 function doSomethingWithToken(method, token) {
-    $("#tokenSpan").html("Method: " + method + ", Token: " + token);
+    $("#tokenSpan").html("Method: <strong>" + method + "</strong>, Token: <strong>" + token + "</strong>");
 }
 
 function processMessage(arg) {
@@ -50,8 +58,6 @@ function processMessage(arg) {
 }
 
 function showLoginPopup() {
-
-    console.log("Showing login popup");
 
     var url = location.protocol + "//" + location.hostname + "/auth-start.html";
 
