@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.16.1/js/msal-browser.js"></script>
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        const msalConfig = {
+            auth: {
+                clientId: "cdb8813c-d7c7-4ef2-bf8a-2685c2341e5f",
+                redirectUri: "https://805cfdc6c286.ngrok.io/auth-end.html"
+            }
+        };
+
+        var requestObj = {
+            scopes: [`https://graph.microsoft.com/User.Read`],
+            prompt: "select_account"
+        };
+
+        const clientApp = new msal.PublicClientApplication(msalConfig);
+
+        clientApp.loginRedirect(requestObj);
+
+
+    </script>
+</head>
+<body>
+    Auth Start!
+</body>
+</html>
