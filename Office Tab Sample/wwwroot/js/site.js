@@ -36,7 +36,7 @@ Office.onReady(async () => {
 
     timerResult = new Date().getTime() - getAccessTokenTimer;
 
-    $("#timings").html($("#timings").html() + "<div>OfficeRuntime.auth.getAccessToken (+ HTML rendering) = " + timerResult + "ms</div>");
+    $("#timings").html($("#timings").html() + "<div>OfficeRuntime.auth.getAccessToken (+ HTML rendering & Consent) = " + timerResult + "ms</div>");
 });
 
 function doSomethingWithToken(method, token) {
