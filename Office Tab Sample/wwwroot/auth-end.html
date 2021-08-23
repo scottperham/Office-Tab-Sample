@@ -8,8 +8,11 @@
     <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js" type="text/javascript"></script>
     <script type="text/javascript">
 
-
+        //this is where the user will lang once they have done an Azure AD sign-in, if the fallback method for SSO is used
+        //Office SDK is initialized
         Office.initialize = async function () {
+
+            //similar to Auth-Start options/parameters, but we need to define navigateToLoginRequestUrl: false or it sends us back to Auth-Start, which we do not want in this sample app.
             const msalConfig = {
                 auth: {
                     clientId: "cdb8813c-d7c7-4ef2-bf8a-2685c2341e5f",
@@ -18,11 +21,14 @@
                 }
             };
 
+            //MSAL ClientApp is initalized with msalConfig options
             const clientApp = new msal.PublicClientApplication(msalConfig);
 
+            //this function handles the RedirectPromise and provides us with an Access Token (horray!)
             let response = await clientApp.handleRedirectPromise();
 
-            //document.getElementById("message").innerHTML = "Here: " + response.accessToken;
+            //this function allows us to pass the access token back to the Office App (the parent of this pop-up) along with the status of "success".
+            //This will then kick off the processMessage function in the site.js page
 
             Office.context.ui.messageParent(JSON.stringify({ status: "success", result: response.accessToken }));
         };

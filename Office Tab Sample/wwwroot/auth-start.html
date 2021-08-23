@@ -8,6 +8,9 @@
     <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js" type="text/javascript"></script>
     <script type="text/javascript">
 
+        //this page is opened by Office.context.ui.displayDialogAsync to kick-off the Azure AD sign-in process
+
+        //decale the required parameters/options for the MSAL library to use - it will redirect back to /auth-end.html once the Azure AD sign-in process is completed
         const msalConfig = {
             auth: {
                 clientId: "cdb8813c-d7c7-4ef2-bf8a-2685c2341e5f",
@@ -15,13 +18,18 @@
             }
         };
 
+        //prompt: select_account used to require end-users to select their user-account for this demonstration app. In real world scenario, this may not be required
+
         var requestObj = {
             scopes: [`https://graph.microsoft.com/User.Read`],
             prompt: "select_account"
         };
 
+        //initalize the MSAL browser clientapp with the required configuration
         const clientApp = new msal.PublicClientApplication(msalConfig);
 
+        //begins the sign-in process, by redirecting to Azure AD with the required parameters/options in this page.
+        //This SSO flow is using Code Grant with PKCE(following current best - practices)
         clientApp.loginRedirect(requestObj);
 
 
