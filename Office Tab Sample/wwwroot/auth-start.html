@@ -29,7 +29,7 @@
         const clientApp = new msal.PublicClientApplication(msalConfig);
 
         //begins the sign-in process, by redirecting to Azure AD with the required parameters/options in this page.
-        //This SSO flow is using Code Grant with PKCE(following current best - practices)
+        //This SSO flow is using Code Grant with PKCE(following current best-practices)
         clientApp.loginRedirect(requestObj);
 
 

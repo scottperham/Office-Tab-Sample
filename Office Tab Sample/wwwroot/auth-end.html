@@ -8,7 +8,7 @@
     <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js" type="text/javascript"></script>
     <script type="text/javascript">
 
-        //this is where the user will lang once they have done an Azure AD sign-in, if the fallback method for SSO is used
+        //this is where the user will land once they have done an Azure AD sign-in, if the fallback method for SSO is used
         //Office SDK is initialized
         Office.initialize = async function () {
 
@@ -29,8 +29,10 @@
 
             //this function allows us to pass the access token back to the Office App (the parent of this pop-up) along with the status of "success".
             //This will then kick off the processMessage function in the site.js page
+            //processMessage function will close this pop-up dialog
 
             Office.context.ui.messageParent(JSON.stringify({ status: "success", result: response.accessToken }));
+            //to-do: write code to handle exceptions/failures
         };
 
     </script>

@@ -37,7 +37,7 @@ Office.onReady(async () => {
             $("#loginButton").show();
 
         }
-        //if any other exception code is thrown by getAccessToken then the code will be printed on the index page
+        //if any other exception code is thrown by getAccessToken then the exception code will be printed on the index page
         else {
             $("#tokenSpan").html("An exception occured: Code - " + ex.code);
 		}
@@ -46,7 +46,7 @@ Office.onReady(async () => {
     timerResult = new Date().getTime() - getAccessTokenTimer;
 
     //print on the index page timerResult for OfficeRuntime.auth.getAccessToken
-    //NOTE: this time can include the consent and HTML rendering. To get an accurate time for how long this takes, refresh the page once consent has been granted
+    //NOTE: this time can include consent and HTML rendering. To get an accurate time for how long this takes, refresh the page once consent has been granted
     $("#timings").html($("#timings").html() + "<div>OfficeRuntime.auth.getAccessToken (+ HTML rendering & Consent) = " + timerResult + "ms</div>");
 });
 
@@ -55,7 +55,7 @@ function doSomethingWithToken(method, token) {
     $("#tokenSpan").html("Method: <strong>" + method + "</strong>, Token: <strong>" + token + "</strong>");
 }
 
-//this function is the fallback method for sign-in. It used the Office SDK to open the /auth-start.html page in a pop-up window.
+//this function is the fallback method for sign-in. It uses the Office SDK to open the /auth-start.html page in a pop-up window.
 //This is required, as Azure AD (and many other auth providers) do not support iFraming. Office.context.ui.displayDialogAsync opens a pop-up, not an iFrame.
 function showLoginPopup() {
 
@@ -68,16 +68,18 @@ function showLoginPopup() {
 }
 
 //if dialog is required to get access token, this function is called to process the result.
-//If succesful, doSomethingWithToken is called with "Dialog" set for method, and the access token is passed to the function
+//If successful, doSomethingWithToken is called with "Dialog" set for method, and the access token is passed to the function
 //if unsuccessful, the message 'Something went wrong during login is displayed'
 function processMessage(arg) {
 
     let message = JSON.parse(arg.message);
 
     if (message.status == "success") {
+        //this closes the pop-up used for fallback sign-in
         loginDialog.close();
         doSomethingWithToken("Dialog", message.result);
     }
+    //to-do: write the exception handling in Auth-End and pass reason for failure to index.html page
     else {
         login.close();
         $("#tokenSpan").html("Something went wrong during login");
